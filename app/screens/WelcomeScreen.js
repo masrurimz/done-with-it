@@ -1,8 +1,9 @@
 import React from "react";
-import { ImageBackground, StyleSheet, Text, View, Image } from "react-native";
-import AppButton from "../components/AppButton";
+import { ImageBackground, StyleSheet, View, Image, Text } from "react-native";
 
-export default function WelcomeScreen() {
+import Button from "../components/Button";
+
+function WelcomeScreen(props) {
   return (
     <ImageBackground
       blurRadius={10}
@@ -14,8 +15,8 @@ export default function WelcomeScreen() {
         <Text style={styles.tagline}>Sell What You Don't Need</Text>
       </View>
       <View style={styles.buttonsContainer}>
-        <AppButton title="Login" color="primary" />
-        <AppButton title="Register" color="secondary" />
+        <Button title="Login" />
+        <Button title="Register" color="secondary" />
       </View>
     </ImageBackground>
   );
@@ -31,18 +32,20 @@ const styles = StyleSheet.create({
     padding: 20,
     width: "100%",
   },
+  logo: {
+    width: 100,
+    height: 100,
+  },
+  logoContainer: {
+    position: "absolute",
+    top: 70,
+    alignItems: "center",
+  },
   tagline: {
     fontSize: 25,
     fontWeight: "600",
     paddingVertical: 20,
   },
-  logoContainer: {
-    position: "absolute",
-    top: 100,
-    alignItems: "center",
-  },
-  logo: {
-    width: 100,
-    height: 100,
-  },
 });
+
+export default WelcomeScreen;

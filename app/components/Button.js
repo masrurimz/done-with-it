@@ -1,8 +1,9 @@
 import React from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { colors } from "../config/colors";
+import { StyleSheet, Text, TouchableOpacity } from "react-native";
 
-export default function AppButton({ title, onPress, color = "primary" }) {
+import colors from "../config/colors";
+
+function AppButton({ title, onPress, color = "primary" }) {
   return (
     <TouchableOpacity
       style={[styles.button, { backgroundColor: colors[color] }]}
@@ -30,3 +31,5 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
 });
+
+export default AppButton;

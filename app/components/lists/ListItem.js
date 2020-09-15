@@ -1,41 +1,39 @@
 import React from "react";
-import { Image, StyleSheet, TouchableHighlight, View } from "react-native";
+import { View, StyleSheet, Image, TouchableHighlight } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-
-import { colors } from "../../config/colors";
-import AppText from "../AppText";
 import Swipeable from "react-native-gesture-handler/Swipeable";
-import { defaultStyles } from "../../config/styles";
 
-export default function ListItem({
-  image,
-  IconComponent,
+import Text from "../Text";
+import colors from "../../config/colors";
+
+function ListItem({
   title,
   subTitle,
+  image,
+  IconComponent,
   onPress,
   renderRightActions,
-  style,
 }) {
   return (
     <Swipeable renderRightActions={renderRightActions}>
       <TouchableHighlight underlayColor={colors.light} onPress={onPress}>
-        <View style={[styles.container, style]}>
+        <View style={styles.container}>
           {IconComponent}
-          {image && <Image source={image} style={styles.image} />}
-          <View style={styles.details}>
-            <AppText style={styles.title} numberOfLines={1}>
+          {image && <Image style={styles.image} source={image} />}
+          <View style={styles.detailsContainer}>
+            <Text style={styles.title} numberOfLines={1}>
               {title}
-            </AppText>
+            </Text>
             {subTitle && (
-              <AppText style={styles.subTitle} numberOfLines={2}>
+              <Text style={styles.subTitle} numberOfLines={2}>
                 {subTitle}
-              </AppText>
+              </Text>
             )}
           </View>
           <MaterialCommunityIcons
-            color={defaultStyles.colors.medium}
+            color={colors.medium}
             name="chevron-right"
-            size={30}
+            size={25}
           />
         </View>
       </TouchableHighlight>
@@ -45,11 +43,12 @@ export default function ListItem({
 
 const styles = StyleSheet.create({
   container: {
+    alignItems: "center",
     flexDirection: "row",
     padding: 15,
-    alignItems: "center",
+    backgroundColor: colors.white,
   },
-  details: {
+  detailsContainer: {
     flex: 1,
     marginLeft: 10,
     justifyContent: "center",
@@ -61,9 +60,10 @@ const styles = StyleSheet.create({
   },
   subTitle: {
     color: colors.medium,
-    fontSize: 16,
   },
   title: {
     fontWeight: "500",
   },
 });
+
+export default ListItem;

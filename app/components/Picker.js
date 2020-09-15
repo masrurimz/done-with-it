@@ -1,25 +1,26 @@
-import React, { Fragment, useState } from "react";
+import React, { useState } from "react";
 import {
-  StyleSheet,
-  Text,
   View,
+  StyleSheet,
   TouchableWithoutFeedback,
   Modal,
   Button,
   FlatList,
 } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { colors } from "../config/colors";
-import { defaultStyles } from "../config/styles";
-import AppText from "./AppText";
-import Screen from "./Screen";
-import PickerItem from "./PickerItem";
 
-export default function AppPicker({
+import Text from "./Text";
+import defaultStyles from "../config/styles";
+import PickerItem from "./PickerItem";
+import Screen from "./Screen";
+
+function AppPicker({
   icon,
   items,
-  placeholder,
+  numberOfColumns = 1,
   onSelectItem,
+  PickerItemComponent = PickerItem,
+  placeholder,
   selectedItem,
   width = "100%",
 }) {
@@ -38,10 +39,11 @@ export default function AppPicker({
             />
           )}
           {selectedItem ? (
-            <AppText style={styles.text}>{selectedItem.label}</AppText>
+            <Text style={styles.text}>{selectedItem.label}</Text>
           ) : (
-            <AppText style={styles.placeholder}>{placeholder}</AppText>
+            <Text style={styles.placeholder}>{placeholder}</Text>
           )}
+
           <MaterialCommunityIcons
             name="chevron-down"
             size={20}
@@ -55,8 +57,10 @@ export default function AppPicker({
           <FlatList
             data={items}
             keyExtractor={(item) => item.value.toString()}
+            numColumns={numberOfColumns}
             renderItem={({ item }) => (
-              <PickerItem
+              <PickerItemComponent
+                item={item}
                 label={item.label}
                 onPress={() => {
                   setModalVisible(false);
@@ -78,7 +82,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     padding: 15,
     marginVertical: 10,
-    alignItems: "center",
   },
   icon: {
     marginRight: 10,
@@ -91,3 +94,5 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 });
+
+export default AppPicker;

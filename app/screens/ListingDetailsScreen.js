@@ -1,16 +1,17 @@
 import React from "react";
-import { Image, StyleSheet, Text, View } from "react-native";
-import { colors } from "../config/colors";
-import AppText from "./AppText";
-import ListItem from "./ListItem";
+import { View, Image, StyleSheet } from "react-native";
 
-export default function ListingDetailsScreen() {
+import colors from "../config/colors";
+import ListItem from "../components/lists/ListItem";
+import Text from "../components/Text";
+
+function ListingDetailsScreen(props) {
   return (
     <View>
       <Image style={styles.image} source={require("../assets/jacket.jpg")} />
-      <View style={styles.detaislContainer}>
-        <AppText style={styles.title}>Red jacket for sale</AppText>
-        <AppText style={styles.price}>$100</AppText>
+      <View style={styles.detailsContainer}>
+        <Text style={styles.title}>Red jacket for sale</Text>
+        <Text style={styles.price}>$100</Text>
         <View style={styles.userContainer}>
           <ListItem
             image={require("../assets/mosh.jpg")}
@@ -24,7 +25,7 @@ export default function ListingDetailsScreen() {
 }
 
 const styles = StyleSheet.create({
-  detaislContainer: {
+  detailsContainer: {
     padding: 20,
   },
   image: {
@@ -32,17 +33,18 @@ const styles = StyleSheet.create({
     height: 300,
   },
   price: {
-    fontSize: 20,
-    fontWeight: "bold",
     color: colors.secondary,
+    fontWeight: "bold",
+    fontSize: 20,
     marginVertical: 10,
   },
   title: {
     fontSize: 24,
     fontWeight: "500",
-    color: colors.black,
   },
   userContainer: {
-    marginVertical: 15,
+    marginVertical: 40,
   },
 });
+
+export default ListingDetailsScreen;

@@ -1,9 +1,10 @@
 import React from "react";
-import { StyleSheet, Text, View, FlatList } from "react-native";
+import { StyleSheet, View, FlatList } from "react-native";
+
+import { ListItem, ListItemSeparator } from "../components/lists";
+import colors from "../config/colors";
 import Icon from "../components/Icon";
-import { ListItem, ListItemSeparator } from "../components/list";
 import Screen from "../components/Screen";
-import { colors } from "../config/colors";
 
 const menuItems = [
   {
@@ -22,7 +23,7 @@ const menuItems = [
   },
 ];
 
-export default function AccountScreen() {
+function AccountScreen(props) {
   return (
     <Screen style={styles.screen}>
       <View style={styles.container}>
@@ -30,13 +31,13 @@ export default function AccountScreen() {
           title="Mosh Hamedani"
           subTitle="programmingwithmosh@gmail.com"
           image={require("../assets/mosh.jpg")}
-          style={styles.listItem}
         />
       </View>
       <View style={styles.container}>
         <FlatList
           data={menuItems}
-          keyExtractor={(menuItems) => menuItems.title}
+          keyExtractor={(menuItem) => menuItem.title}
+          ItemSeparatorComponent={ListItemSeparator}
           renderItem={({ item }) => (
             <ListItem
               title={item.title}
@@ -46,29 +47,25 @@ export default function AccountScreen() {
                   backgroundColor={item.icon.backgroundColor}
                 />
               }
-              style={styles.listItem}
             />
           )}
-          ItemSeparatorComponent={ListItemSeparator}
         />
       </View>
       <ListItem
         title="Log Out"
         IconComponent={<Icon name="logout" backgroundColor="#ffe66d" />}
-        style={styles.listItem}
       />
     </Screen>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    marginVertical: 20,
-  },
   screen: {
     backgroundColor: colors.light,
   },
-  listItem: {
-    backgroundColor: colors.white,
+  container: {
+    marginVertical: 20,
   },
 });
+
+export default AccountScreen;
