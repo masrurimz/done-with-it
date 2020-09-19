@@ -1,10 +1,10 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
+import { Image } from "react-native-expo-image-cache";
 
 import colors from "../config/colors";
 import ListItem from "../components/lists/ListItem";
 import Text from "../components/Text";
-import { Image } from "react-native-expo-image-cache";
 
 function ListingDetailsScreen({ route }) {
   const listing = route.params;
@@ -18,8 +18,8 @@ function ListingDetailsScreen({ route }) {
         uri={listing.images[0].url}
       />
       <View style={styles.detailsContainer}>
-        <Text style={styles.title}>Red jacket for sale</Text>
-        <Text style={styles.price}>$100</Text>
+        <Text style={styles.title}>{listing.title}</Text>
+        <Text style={styles.price}>{listing.price}</Text>
         <View style={styles.userContainer}>
           <ListItem
             image={require("../assets/mosh.jpg")}
