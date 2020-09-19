@@ -1,13 +1,13 @@
 import React from "react";
-import { View, StyleSheet, Image } from "react-native";
+import { View, StyleSheet, Image, TouchableOpacity } from "react-native";
 
 import Text from "./Text";
 import colors from "../config/colors";
 
-function Card({ title, subTitle, image }) {
+function Card({ title, subTitle, imageUrl, onPress }) {
   return (
-    <View style={styles.card}>
-      <Image style={styles.image} source={image} />
+    <TouchableOpacity style={styles.card} onPress={onPress}>
+      <Image style={styles.image} source={{ uri: imageUrl }} />
       <View style={styles.detailsContainer}>
         <Text style={styles.title} numberOfLines={1}>
           {title}
@@ -16,7 +16,7 @@ function Card({ title, subTitle, image }) {
           {subTitle}
         </Text>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 }
 
